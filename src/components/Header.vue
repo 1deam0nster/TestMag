@@ -28,6 +28,7 @@ export default {
 <style>
 
 select{
+  padding-left: 10px;
   height: 30px;
   width: 100px;
   border-radius: 0px;

@@ -1,75 +1,12 @@
 <template>
   <div class="grid">
 
-    <div class="card">
-      <img src="../assets/image01.png" alt="item">
+    <div class="card" v-for="(item, index) in items">
+      <img :src="'http://46.101.254.173' + item.image" alt="item">
       <div class="items">
-        <div class="item_title">Mizonu Wave Ignitus</div>
-        <div class="item_category">Soccer shoes</div>
-        <div class="item_price">$380</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="../assets/image01.png" alt="item">
-      <div class="items">
-        <div class="item_title">Mizonu Wave Ignitus</div>
-        <div class="item_category">Soccer shoes</div>
-        <div class="item_price">$380</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="../assets/image01.png" alt="item">
-      <div class="items">
-        <div class="item_title">Mizonu Wave Ignitus</div>
-        <div class="item_category">Soccer shoes</div>
-        <div class="item_price">$380</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="../assets/image01.png" alt="item">
-      <div class="items">
-        <div class="item_title">Mizonu Wave Ignitus</div>
-        <div class="item_category">Soccer shoes</div>
-        <div class="item_price">$380</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="../assets/image01.png" alt="item">
-      <div class="items">
-        <div class="item_title">Mizonu Wave Ignitus</div>
-        <div class="item_category">Soccer shoes</div>
-        <div class="item_price">$380</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="../assets/image01.png" alt="item">
-      <div class="items">
-        <div class="item_title">Mizonu Wave Ignitus</div>
-        <div class="item_category">Soccer shoes</div>
-        <div class="item_price">$380</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="../assets/image01.png" alt="item">
-      <div class="items">
-        <div class="item_title">Mizonu Wave Ignitus</div>
-        <div class="item_category">Soccer shoes</div>
-        <div class="item_price">$380</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="../assets/image01.png" alt="item">
-      <div class="items">
-        <div class="item_title">Mizonu Wave Ignitus</div>
-        <div class="item_category">Soccer shoes</div>
-        <div class="item_price">$380</div>
+        <div class="item_title">{{ item.name }}</div>
+        <div class="item_category">{{ item.type }}</div>
+        <div class="item_price">{{ item.price }}$</div>
       </div>
     </div>
 
@@ -80,6 +17,7 @@
   export default {
     data () {
       return {
+        imgurl: 'http://46.101.254.173/',
         items: []
       }
     },
@@ -87,10 +25,10 @@
       getItems: function() {
         var url = 'http://46.101.254.173/public/api/stores/test_s/?format=json';
         this.$http.get(url).then(function(response) {
-          this.getcolor = JSON.parse(response.data.result);
-          console.log(response.data.result)
+          this.items = response.data.results;
+          console.log(response.data.results);
         },  function(error) {
-          console.log("Error get!")
+          console.log("Error get!");
         })
       },
 
@@ -146,10 +84,12 @@
   .item_price{
     color: red;
     font-weight: bold;
-    display: flex;
+    display: inline-grid;
     justify-content: right;
+    -webkit-justify-content: right;
     align-items: center;
     grid-area: price;
+    text-align: right;
   }
 
   @media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
